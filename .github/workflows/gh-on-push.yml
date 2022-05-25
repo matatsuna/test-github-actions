@@ -16,3 +16,17 @@ jobs:
         with:
           name: build
           path: ./
+  slack-notify:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    if: ${{ always() }}
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v2
+      - name: slack
+        env:
+          SLACK_MESSAGE: ${{ (job.WORKFLOW_CONCLUSION == 'success' && 'デプロイ成功') || 'デプロイ失敗' }}
+          SLACK_COLOR: ${{ (job.WORKFLOW_CONCLUSION == 'success' && 'good') || 'danger' }}
+        run: |
+          echo ${{ env.WORKFLOW_CONCLUSION }}
+          echo ${{ env.SLACK_MESSAGE }}
+          echo ${{ env.SLACK_COLOR }}
