@@ -24,8 +24,8 @@ jobs:
       - uses: technote-space/workflow-conclusion-action@v2
       - name: slack
         env:
-          SLACK_MESSAGE: ${{ (job.WORKFLOW_CONCLUSION == 'success' && 'デプロイ成功') || 'デプロイ失敗' }}
-          SLACK_COLOR: ${{ (job.WORKFLOW_CONCLUSION == 'success' && 'good') || 'danger' }}
+          SLACK_MESSAGE: ${{ (env.WORKFLOW_CONCLUSION == 'success' && 'デプロイ成功') || 'デプロイ失敗' }}
+          SLACK_COLOR: ${{ (env.WORKFLOW_CONCLUSION == 'success' && 'good') || 'danger' }}
         run: |
           echo ${{ env.WORKFLOW_CONCLUSION }}
           echo ${{ env.SLACK_MESSAGE }}
