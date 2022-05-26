@@ -12,7 +12,7 @@ jobs:
       - name: tag
         env:
           REF: ${{ github.ref }}
-          REF_ENV: ${{ $GITHUB_REF }}
+          REF_ENV: ${{ env.REF }}
           TAG: v1.0.1
         run: |
           echo $GITHUB_REF##*/
