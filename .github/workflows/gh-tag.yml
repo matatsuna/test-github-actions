@@ -6,19 +6,13 @@ on:
       - '**'
       - '!task'
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
   show-tag:
     runs-on: ubuntu-latest
-    needs: [ build ]
     steps:
       - name: tag
         env:
           REF: ${{ github.ref }}
+          REF_ENV: ${{ $GITHUB_REF##*/ }}
           TAG: v1.0.1
         run: |
           echo $GITHUB_REF##*/
