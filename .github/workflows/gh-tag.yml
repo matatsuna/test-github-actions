@@ -12,12 +12,11 @@ jobs:
       - name: ref to tag
         id: ref
         run: |
-          echo "::set-output name=tag::hello"
+          echo "::set-output name=tag::${GITHUB_REF##*/}"
 
       - name: tag
         env:
           REF: ${{ steps.ref.outputs.tag }}
-          REF_ENV: ${{${GITHUB_REF##*/}}}
           TAG: v1.0.1
         run: |
           echo ${GITHUB_REF##*/}
