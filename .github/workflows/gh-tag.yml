@@ -6,7 +6,7 @@ on:
       - '**'
       - '!task'
     tags:
-      - 'v[0-9]+(\.[0-9]+)*'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
   calc-tag:
     runs-on: ubuntu-latest
