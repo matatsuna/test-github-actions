@@ -18,8 +18,8 @@ jobs:
     steps:
       - name: tag
         env:
-          TAG: ${{ GITHUB_REF##*/ }}
+          TAG: ${{ github.ref##*/ }}
         run: |
           echo ${{ env.TAG }} | sed -e "s/\./-/g"
-          echo ${{ GITHUB_REF##*/ }}
+          echo ${{ github.ref##*/ }}
           echo ${{ env.TAG }}
