@@ -9,12 +9,17 @@ jobs:
   show-tag:
     runs-on: ubuntu-latest
     steps:
+      - name: ref to tag
+        id: ref
+        run: |
+          echo "::set-output name=tag::hello"
+
       - name: tag
         env:
-          REF: ${{ github.ref }}
+          REF: ${{ steps.ref.outputs.tag }}
           REF_ENV: ${{ env.REF }}
           TAG: v1.0.1
         run: |
-          echo $GITHUB_REF##*/
+          echo ${GITHUB_REF##*/}
           echo ${{ env.TAG }} | sed -e "s/\./-/g"
           echo ${{ env.TAG }}
