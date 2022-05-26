@@ -6,19 +6,24 @@ on:
       - '**'
       - '!task'
     tags:
-      - '**'
+      - 'v[0-9]+(\.[0-9]+)*'
 jobs:
-  show-tag:
+  calc-tag:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{steps.tag.outputs.tag}}
     steps:
-      - name: tag
+      - name: get tag
         id: tag
         run: |
           echo "::set-output name=tag::${GITHUB_REF##*/}"
-
-      - name: result
+  use-tag:
+    runs-on: ubuntu-latest
+    needs: [calc-tag]
+    steps:
+      - name: use tag
         env:
-          TAG: ${{ steps.tag.outputs.tag }}
+          TAG: ${{ needs.calc-tag.outputs.tag }}
         run: |
           echo ${{ env.TAG }} | sed -e "s/\./-/g"
           echo ${{ env.TAG }}
