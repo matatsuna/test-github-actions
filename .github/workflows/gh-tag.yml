@@ -17,7 +17,7 @@ jobs:
       - name: tag
         env:
           REF: ${{ steps.ref.outputs.tag }}
-          REF_ENV: ${{ env.REF }}
+          REF_ENV: ${GITHUB_REF##*/}
           TAG: v1.0.1
         run: |
           echo ${GITHUB_REF##*/}
