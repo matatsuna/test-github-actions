@@ -19,7 +19,8 @@ jobs:
       - name: tag
         env:
           REF: ${{ github.ref }}
-          TAG: ${{ GITHUB_REF##*/ }}
+          TAG: v1.0.1
         run: |
+          echo ${{ GITHUB_REF##*/ }}
           echo ${{ env.TAG }} | sed -e "s/\./-/g"
           echo ${{ env.TAG }}
